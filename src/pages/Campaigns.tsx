@@ -106,8 +106,8 @@ export default function Campaigns() {
 
   return (
     <AppLayout
-      title="캠페인"
-      description="자동화 캠페인을 만들고 상태를 관리하세요"
+      title="개인화 캠페인 관리"
+      description="고객 행동 트리거 기반 자동화 캠페인을 만들고 상태를 관리하세요"
       action={
         <Button asChild className="bg-gradient-primary shadow-elevated">
           <Link to="/campaigns/new">
