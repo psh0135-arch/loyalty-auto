@@ -100,6 +100,8 @@ export default function Auth() {
           <span className="text-lg font-semibold">AI CRM Automation</span>
         </Link>
 
+        <h1 className="sr-only">AI CRM 자동화 로그인 및 회원가입</h1>
+
         <Card className="shadow-elevated">
           <CardHeader>
             <CardTitle>환영합니다</CardTitle>

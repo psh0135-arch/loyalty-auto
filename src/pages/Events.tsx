@@ -162,7 +162,8 @@ export default function Events() {
   const profile = selected ? customerProfiles[selected] || defaultProfile(selected) : null;
 
   return (
-    <AppLayout title="고객 이벤트" description="실시간 고객 행동 로그를 확인하세요">
+    <AppLayout title="고객 행동 이벤트 로그" description="실시간 고객 행동 트리거 데이터를 확인하세요">
+      <h2 className="sr-only">이벤트 검색 및 필터</h2>
       <Card className="shadow-card mb-4">
         <CardContent className="p-4 flex flex-col md:flex-row gap-3">
           <div className="relative flex-1">
@@ -190,6 +191,7 @@ export default function Events() {
         </CardContent>
       </Card>
 
+      <h2 className="sr-only">실시간 고객 이벤트 로그</h2>
       <Card className="shadow-card">
         <CardContent className="p-0">
           {filtered.length === 0 ? (
@@ -265,9 +267,9 @@ export default function Events() {
           {profile && (
             <div className="space-y-5">
               <section>
-                <h4 className="text-xs font-semibold uppercase tracking-wide text-muted-foreground mb-2">
+                <h3 className="text-xs font-semibold uppercase tracking-wide text-muted-foreground mb-2">
                   최근 행동 내역
-                </h4>
+                </h3>
                 <ul className="space-y-1.5">
                   {profile.recentBehaviors.map((b, i) => (
                     <li key={i} className="flex items-center justify-between text-sm rounded-md bg-secondary/50 px-3 py-2">
@@ -279,9 +281,9 @@ export default function Events() {
               </section>
 
               <section>
-                <h4 className="text-xs font-semibold uppercase tracking-wide text-muted-foreground mb-2">
+                <h3 className="text-xs font-semibold uppercase tracking-wide text-muted-foreground mb-2">
                   관심 카테고리
-                </h4>
+                </h3>
                 <div className="flex flex-wrap gap-1.5">
                   {profile.favoriteCategories.map((c) => (
                     <Badge key={c} variant="secondary" className="bg-accent text-accent-foreground">
@@ -292,9 +294,9 @@ export default function Events() {
               </section>
 
               <section>
-                <h4 className="text-xs font-semibold uppercase tracking-wide text-muted-foreground mb-2">
+                <h3 className="text-xs font-semibold uppercase tracking-wide text-muted-foreground mb-2">
                   구매 이력
-                </h4>
+                </h3>
                 {profile.purchases.length === 0 ? (
                   <p className="text-sm text-muted-foreground">구매 이력이 없습니다</p>
                 ) : (

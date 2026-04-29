@@ -87,8 +87,8 @@ export default function Analytics() {
 
   return (
     <AppLayout
-      title="성과 분석"
-      description="캠페인별 성과와 AI 인사이트를 한눈에 확인하세요"
+      title="캠페인 성과 분석"
+      description="푸시·이메일·SMS 캠페인 성과와 AI 인사이트를 한눈에 확인하세요"
       action={
         <Select defaultValue="7d">
           <SelectTrigger className="w-[140px]">
@@ -103,17 +103,22 @@ export default function Analytics() {
       }
     >
       {/* KPIs */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-4 mb-6">
-        <StatCard label="발송 수" value="284,512" delta="+8.3%" trend="up" icon={Send} />
-        <StatCard label="오픈율" value="42.6%" delta="+2.1%p" trend="up" icon={MailOpen} />
-        <StatCard label="클릭률" value="9.2%" delta="+1.4%p" trend="up" icon={MousePointerClick} />
-        <StatCard label="전환율" value="3.8%" delta="-0.2%p" trend="down" icon={TrendingUp} />
-        <StatCard label="구매 전환 수" value="10,812" delta="+6.4%" trend="up" icon={ShoppingCart} />
-        <StatCard label="예상 매출" value={fmtKRW(totalRevenue)} delta="+12.7%" trend="up" icon={CircleDollarSign} />
-      </div>
+      <section aria-labelledby="kpi-heading" className="mb-6">
+        <h2 id="kpi-heading" className="sr-only">핵심 성과 지표 (KPI)</h2>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-4">
+          <StatCard label="발송 수" value="284,512" delta="+8.3%" trend="up" icon={Send} />
+          <StatCard label="오픈율" value="42.6%" delta="+2.1%p" trend="up" icon={MailOpen} />
+          <StatCard label="클릭률" value="9.2%" delta="+1.4%p" trend="up" icon={MousePointerClick} />
+          <StatCard label="전환율" value="3.8%" delta="-0.2%p" trend="down" icon={TrendingUp} />
+          <StatCard label="구매 전환 수" value="10,812" delta="+6.4%" trend="up" icon={ShoppingCart} />
+          <StatCard label="예상 매출" value={fmtKRW(totalRevenue)} delta="+12.7%" trend="up" icon={CircleDollarSign} />
+        </div>
+      </section>
 
       {/* Charts */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 mb-6">
+      <section aria-labelledby="charts-heading" className="mb-6">
+        <h2 id="charts-heading" className="sr-only">발송 및 클릭률 추이</h2>
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
         <Card className="shadow-card">
           <CardHeader>
             <CardTitle className="text-base font-semibold">일자별 발송 수</CardTitle>
@@ -168,9 +173,12 @@ export default function Analytics() {
             </ResponsiveContainer>
           </CardContent>
         </Card>
-      </div>
+        </div>
+      </section>
 
-      <Card className="shadow-card mb-6">
+      <section aria-labelledby="cvr-heading" className="mb-6">
+        <h2 id="cvr-heading" className="sr-only">캠페인별 전환율 비교</h2>
+      <Card className="shadow-card">
         <CardHeader>
           <CardTitle className="text-base font-semibold">캠페인별 전환율 비교</CardTitle>
         </CardHeader>
@@ -193,14 +201,17 @@ export default function Analytics() {
           </ResponsiveContainer>
         </CardContent>
       </Card>
+      </section>
 
       {/* AI Insights */}
-      <Card className="shadow-card mb-6 border-primary/20">
+      <section aria-labelledby="ai-insights-heading" className="mb-6">
+        <h2 id="ai-insights-heading" className="sr-only">AI 인사이트</h2>
+      <Card className="shadow-card border-primary/20">
         <CardHeader className="flex flex-row items-center gap-2">
           <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-gradient-primary">
             <Sparkles className="h-4 w-4 text-primary-foreground" />
           </div>
-          <CardTitle className="text-base font-semibold">AI 인사이트</CardTitle>
+          <CardTitle className="text-base font-semibold">AI 캠페인 인사이트</CardTitle>
         </CardHeader>
         <CardContent>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
@@ -221,8 +232,11 @@ export default function Analytics() {
           </div>
         </CardContent>
       </Card>
+      </section>
 
       {/* Campaigns Table */}
+      <section aria-labelledby="campaigns-table-heading">
+        <h2 id="campaigns-table-heading" className="sr-only">캠페인별 상세 성과</h2>
       <Card className="shadow-card">
         <CardHeader>
           <CardTitle className="text-base font-semibold">캠페인별 성과</CardTitle>
@@ -266,6 +280,7 @@ export default function Analytics() {
           </Table>
         </CardContent>
       </Card>
+      </section>
     </AppLayout>
   );
 }

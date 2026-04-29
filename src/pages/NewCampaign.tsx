@@ -104,8 +104,8 @@ export default function NewCampaign() {
 
   return (
     <AppLayout
-      title="캠페인 생성"
-      description="AI가 고객 행동에 맞는 개인화 메시지를 생성합니다"
+      title="개인화 캠페인 생성"
+      description="고객 행동 트리거에 맞춰 AI가 개인화 메시지를 자동 생성합니다"
     >
       <div className="mb-6 flex flex-wrap items-center gap-2 text-xs">
         {steps.map((s, i) => (

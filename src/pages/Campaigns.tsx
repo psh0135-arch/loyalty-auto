@@ -106,8 +106,8 @@ export default function Campaigns() {
 
   return (
     <AppLayout
-      title="캠페인"
-      description="자동화 캠페인을 만들고 상태를 관리하세요"
+      title="개인화 캠페인 관리"
+      description="고객 행동 트리거 기반 자동화 캠페인을 만들고 상태를 관리하세요"
       action={
         <Button asChild className="bg-gradient-primary shadow-elevated">
           <Link to="/campaigns/new">
@@ -116,6 +116,7 @@ export default function Campaigns() {
         </Button>
       }
     >
+      <h2 className="sr-only">캠페인 필터 및 검색</h2>
       <Card className="shadow-card mb-4">
         <CardContent className="p-4 flex flex-col md:flex-row gap-3 md:items-center md:justify-between">
           <Tabs value={tab} onValueChange={setTab} className="w-full md:w-auto">
@@ -142,6 +143,7 @@ export default function Campaigns() {
         </CardContent>
       </Card>
 
+      <h2 className="sr-only">캠페인 목록</h2>
       <Card className="shadow-card">
         <CardContent className="p-0">
           {filtered.length === 0 ? (
