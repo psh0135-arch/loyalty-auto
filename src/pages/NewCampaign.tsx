@@ -351,8 +351,14 @@ export default function NewCampaign() {
               </div>
 
               <div className="flex flex-col gap-2 pt-4 border-t border-border">
-                <Button onClick={handleSave} className="bg-gradient-primary shadow-elevated">
-                  저장
+                <Button
+                  onClick={() => handleSave(false)}
+                  className="bg-gradient-primary shadow-elevated"
+                >
+                  캠페인 저장 및 활성화
+                </Button>
+                <Button variant="outline" onClick={() => handleSave(true)}>
+                  초안으로 저장
                 </Button>
                 <Button variant="ghost" onClick={() => navigate("/campaigns")}>
                   취소
