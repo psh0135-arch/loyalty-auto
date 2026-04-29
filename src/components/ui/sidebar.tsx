@@ -164,6 +164,10 @@ const Sidebar = React.forwardRef<
           }
           side={side}
         >
+          <SheetHeader className="sr-only">
+            <SheetTitle>사이드바 메뉴</SheetTitle>
+            <SheetDescription>주요 페이지로 이동할 수 있는 메뉴입니다.</SheetDescription>
+          </SheetHeader>
           <div className="flex h-full w-full flex-col">{children}</div>
         </SheetContent>
       </Sheet>
