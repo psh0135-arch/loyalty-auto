@@ -10,6 +10,7 @@ import { Label } from "@/components/ui/label";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Sparkles, Loader2 } from "lucide-react";
 import { toast } from "sonner";
+import { Aurora } from "@/components/Aurora";
 
 const emailSchema = z.string().trim().email({ message: "올바른 이메일 형식이 아닙니다" }).max(255);
 const passwordSchema = z
@@ -82,8 +83,11 @@ export default function Auth() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-subtle p-4">
-      <div className="w-full max-w-md">
+    <div className="relative min-h-screen flex items-center justify-center bg-background p-4 overflow-hidden">
+      <div className="absolute inset-0 pointer-events-none">
+        <Aurora colorStops={["#5227FF", "#7cff67", "#5227FF"]} amplitude={1.0} blend={0.5} speed={0.5} />
+      </div>
+      <div className="relative w-full max-w-md">
         <Link to="/" className="flex items-center justify-center gap-2 mb-6">
           <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-gradient-primary shadow-elevated">
             <Sparkles className="h-5 w-5 text-primary-foreground" />
