@@ -73,7 +73,12 @@ export default function Auth() {
     });
     setSubmitting(false);
     if (error) {
-      toast.error("가입 실패", { description: error.message });
+      const isWeak = (error as any)?.code === "weak_password" || /weak|pwned/i.test(error.message);
+      toast.error("가입 실패", {
+        description: isWeak
+          ? "유출된 적이 있는 약한 비밀번호입니다. 더 안전한 비밀번호를 사용하세요. (예: 대소문자+숫자+특수문자 12자 이상)"
+          : error.message,
+      });
       return;
     }
     toast.success("가입이 완료되었습니다", {
