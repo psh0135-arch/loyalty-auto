@@ -265,9 +265,9 @@ export default function Events() {
           {profile && (
             <div className="space-y-5">
               <section>
-                <h4 className="text-xs font-semibold uppercase tracking-wide text-muted-foreground mb-2">
+                <h3 className="text-xs font-semibold uppercase tracking-wide text-muted-foreground mb-2">
                   최근 행동 내역
-                </h4>
+                </h3>
                 <ul className="space-y-1.5">
                   {profile.recentBehaviors.map((b, i) => (
                     <li key={i} className="flex items-center justify-between text-sm rounded-md bg-secondary/50 px-3 py-2">
@@ -279,9 +279,9 @@ export default function Events() {
               </section>
 
               <section>
-                <h4 className="text-xs font-semibold uppercase tracking-wide text-muted-foreground mb-2">
+                <h3 className="text-xs font-semibold uppercase tracking-wide text-muted-foreground mb-2">
                   관심 카테고리
-                </h4>
+                </h3>
                 <div className="flex flex-wrap gap-1.5">
                   {profile.favoriteCategories.map((c) => (
                     <Badge key={c} variant="secondary" className="bg-accent text-accent-foreground">
@@ -292,9 +292,9 @@ export default function Events() {
               </section>
 
               <section>
-                <h4 className="text-xs font-semibold uppercase tracking-wide text-muted-foreground mb-2">
+                <h3 className="text-xs font-semibold uppercase tracking-wide text-muted-foreground mb-2">
                   구매 이력
-                </h4>
+                </h3>
                 {profile.purchases.length === 0 ? (
                   <p className="text-sm text-muted-foreground">구매 이력이 없습니다</p>
                 ) : (
