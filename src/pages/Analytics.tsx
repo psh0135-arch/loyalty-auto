@@ -103,17 +103,22 @@ export default function Analytics() {
       }
     >
       {/* KPIs */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-4 mb-6">
-        <StatCard label="발송 수" value="284,512" delta="+8.3%" trend="up" icon={Send} />
-        <StatCard label="오픈율" value="42.6%" delta="+2.1%p" trend="up" icon={MailOpen} />
-        <StatCard label="클릭률" value="9.2%" delta="+1.4%p" trend="up" icon={MousePointerClick} />
-        <StatCard label="전환율" value="3.8%" delta="-0.2%p" trend="down" icon={TrendingUp} />
-        <StatCard label="구매 전환 수" value="10,812" delta="+6.4%" trend="up" icon={ShoppingCart} />
-        <StatCard label="예상 매출" value={fmtKRW(totalRevenue)} delta="+12.7%" trend="up" icon={CircleDollarSign} />
-      </div>
+      <section aria-labelledby="kpi-heading" className="mb-6">
+        <h2 id="kpi-heading" className="sr-only">핵심 성과 지표 (KPI)</h2>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-4">
+          <StatCard label="발송 수" value="284,512" delta="+8.3%" trend="up" icon={Send} />
+          <StatCard label="오픈율" value="42.6%" delta="+2.1%p" trend="up" icon={MailOpen} />
+          <StatCard label="클릭률" value="9.2%" delta="+1.4%p" trend="up" icon={MousePointerClick} />
+          <StatCard label="전환율" value="3.8%" delta="-0.2%p" trend="down" icon={TrendingUp} />
+          <StatCard label="구매 전환 수" value="10,812" delta="+6.4%" trend="up" icon={ShoppingCart} />
+          <StatCard label="예상 매출" value={fmtKRW(totalRevenue)} delta="+12.7%" trend="up" icon={CircleDollarSign} />
+        </div>
+      </section>
 
       {/* Charts */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 mb-6">
+      <section aria-labelledby="charts-heading" className="mb-6">
+        <h2 id="charts-heading" className="sr-only">발송 및 클릭률 추이</h2>
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
         <Card className="shadow-card">
           <CardHeader>
             <CardTitle className="text-base font-semibold">일자별 발송 수</CardTitle>
