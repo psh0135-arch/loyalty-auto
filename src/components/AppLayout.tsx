@@ -1,0 +1,58 @@
+import { ReactNode } from "react";
+import { Bell, Search } from "lucide-react";
+import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
+import { AppSidebar } from "@/components/AppSidebar";
+import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
+import { Avatar, AvatarFallback } from "@/components/ui/avatar";
+
+interface AppLayoutProps {
+  children: ReactNode;
+  title: string;
+  description?: string;
+  action?: ReactNode;
+}
+
+export default function AppLayout({ children, title, description, action }: AppLayoutProps) {
+  return (
+    <SidebarProvider>
+      <div className="min-h-screen flex w-full bg-gradient-subtle">
+        <AppSidebar />
+        <div className="flex-1 flex flex-col min-w-0">
+          <header className="h-16 flex items-center justify-between gap-4 border-b border-border bg-card/80 backdrop-blur-sm px-4 sticky top-0 z-30">
+            <div className="flex items-center gap-3 min-w-0">
+              <SidebarTrigger />
+              <div className="hidden md:flex items-center gap-2 w-72 max-w-full">
+                <div className="relative w-full">
+                  <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+                  <Input placeholder="캠페인, 고객 검색..." className="pl-9 h-9 bg-secondary/60 border-transparent" />
+                </div>
+              </div>
+            </div>
+            <div className="flex items-center gap-2">
+              <Button variant="ghost" size="icon" className="relative">
+                <Bell className="h-4 w-4" />
+                <span className="absolute top-2 right-2 h-2 w-2 rounded-full bg-primary" />
+              </Button>
+              <Avatar className="h-8 w-8">
+                <AvatarFallback className="bg-gradient-primary text-primary-foreground text-xs font-semibold">
+                  MK
+                </AvatarFallback>
+              </Avatar>
+            </div>
+          </header>
+          <main className="flex-1 p-4 md:p-8">
+            <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-6 md:mb-8">
+              <div>
+                <h1 className="text-2xl md:text-3xl font-semibold tracking-tight text-foreground">{title}</h1>
+                {description && <p className="text-sm text-muted-foreground mt-1">{description}</p>}
+              </div>
+              {action && <div className="shrink-0">{action}</div>}
+            </div>
+            {children}
+          </main>
+        </div>
+      </div>
+    </SidebarProvider>
+  );
+}
