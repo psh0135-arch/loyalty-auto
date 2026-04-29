@@ -16,8 +16,8 @@ const recentCampaigns = [
 export default function Dashboard() {
   return (
     <AppLayout
-      title="대시보드"
-      description="캠페인 성과를 한눈에 확인하세요"
+      title="CRM 자동화 대시보드"
+      description="개인화 캠페인 성과와 핵심 KPI를 한눈에 확인하세요"
       action={
         <Button asChild className="bg-gradient-primary shadow-elevated">
           <Link to="/campaigns/new">
@@ -27,12 +27,15 @@ export default function Dashboard() {
         </Button>
       }
     >
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
-        <StatCard label="전체 캠페인 수" value="48" delta="+12% 이번 달" trend="up" icon={Megaphone} />
-        <StatCard label="발송 메시지 수" value="284,512" delta="+8.3%" trend="up" icon={Send} />
-        <StatCard label="평균 클릭률 (CTR)" value="9.2%" delta="+1.4%p" trend="up" icon={MousePointerClick} />
-        <StatCard label="전환율 (CVR)" value="3.8%" delta="-0.2%p" trend="down" icon={TrendingUp} />
-      </div>
+      <section aria-labelledby="kpi-heading" className="mb-6">
+        <h2 id="kpi-heading" className="sr-only">캠페인 핵심 성과 지표 (KPI)</h2>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+          <StatCard label="전체 캠페인 수" value="48" delta="+12% 이번 달" trend="up" icon={Megaphone} />
+          <StatCard label="발송 메시지 수" value="284,512" delta="+8.3%" trend="up" icon={Send} />
+          <StatCard label="평균 클릭률 (CTR)" value="9.2%" delta="+1.4%p" trend="up" icon={MousePointerClick} />
+          <StatCard label="전환율 (CVR)" value="3.8%" delta="-0.2%p" trend="down" icon={TrendingUp} />
+        </div>
+      </section>
 
       <Card className="shadow-card">
         <CardHeader className="flex flex-row items-center justify-between">
