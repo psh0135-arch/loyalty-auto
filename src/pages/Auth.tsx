@@ -23,7 +23,7 @@ export default function Auth() {
   const { user, loading } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
-  const from = (location.state as { from?: string })?.from || "/";
+  const from = (location.state as { from?: string })?.from || "/dashboard";
 
   const [tab, setTab] = useState("signin");
   const [email, setEmail] = useState("");
