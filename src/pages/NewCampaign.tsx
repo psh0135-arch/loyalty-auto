@@ -258,6 +258,11 @@ export default function NewCampaign() {
               </div>
             </CardContent>
           </Card>
+
+          <AIMessageGenerator
+            defaultChannel={(channel as MessageChannel) || "push"}
+            defaultGoal={goals.find((g) => g.id === goal)?.label || ""}
+          />
         </div>
 
         <div className="lg:col-span-1">
