@@ -87,8 +87,8 @@ export default function Analytics() {
 
   return (
     <AppLayout
-      title="성과 분석"
-      description="캠페인별 성과와 AI 인사이트를 한눈에 확인하세요"
+      title="캠페인 성과 분석"
+      description="푸시·이메일·SMS 캠페인 성과와 AI 인사이트를 한눈에 확인하세요"
       action={
         <Select defaultValue="7d">
           <SelectTrigger className="w-[140px]">
