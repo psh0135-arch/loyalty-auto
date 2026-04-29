@@ -143,6 +143,7 @@ export default function Campaigns() {
         </CardContent>
       </Card>
 
+      <h2 className="sr-only">캠페인 목록</h2>
       <Card className="shadow-card">
         <CardContent className="p-0">
           {filtered.length === 0 ? (
