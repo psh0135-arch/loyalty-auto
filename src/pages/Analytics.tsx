@@ -280,6 +280,7 @@ export default function Analytics() {
           </Table>
         </CardContent>
       </Card>
+      </section>
     </AppLayout>
   );
 }
