@@ -1,5 +1,5 @@
 import { NavLink, useLocation } from "react-router-dom";
-import { LayoutDashboard, Megaphone, PlusCircle, Sparkles, Activity, BarChart3 } from "lucide-react";
+import { LayoutDashboard, Megaphone, PlusCircle, Sparkles, Activity, BarChart3, Shield } from "lucide-react";
 import {
   Sidebar,
   SidebarContent,
@@ -12,6 +12,7 @@ import {
   SidebarMenuItem,
   useSidebar,
 } from "@/components/ui/sidebar";
+import { useAuth } from "@/contexts/AuthContext";
 
 const overview = [
   { title: "대시보드", url: "/", icon: LayoutDashboard },
@@ -25,8 +26,11 @@ const campaign = [
 
 const data = [{ title: "고객 이벤트", url: "/events", icon: Activity }];
 
+const adminItems = [{ title: "관리자", url: "/admin", icon: Shield }];
+
 export function AppSidebar() {
   const { state } = useSidebar();
+  const { isAdmin } = useAuth();
   const collapsed = state === "collapsed";
   const { pathname } = useLocation();
   const isActive = (path: string) =>
@@ -80,6 +84,15 @@ export function AppSidebar() {
             <SidebarMenu>{renderItems(data)}</SidebarMenu>
           </SidebarGroupContent>
         </SidebarGroup>
+
+        {isAdmin && (
+          <SidebarGroup>
+            <SidebarGroupLabel>시스템</SidebarGroupLabel>
+            <SidebarGroupContent>
+              <SidebarMenu>{renderItems(adminItems)}</SidebarMenu>
+            </SidebarGroupContent>
+          </SidebarGroup>
+        )}
       </SidebarContent>
     </Sidebar>
   );
