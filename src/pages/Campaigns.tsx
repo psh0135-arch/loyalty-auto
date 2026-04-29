@@ -116,6 +116,7 @@ export default function Campaigns() {
         </Button>
       }
     >
+      <h2 className="sr-only">캠페인 필터 및 검색</h2>
       <Card className="shadow-card mb-4">
         <CardContent className="p-4 flex flex-col md:flex-row gap-3 md:items-center md:justify-between">
           <Tabs value={tab} onValueChange={setTab} className="w-full md:w-auto">
