@@ -37,9 +37,10 @@ export default function Dashboard() {
         </div>
       </section>
 
+      <section aria-labelledby="recent-campaigns-heading">
       <Card className="shadow-card">
         <CardHeader className="flex flex-row items-center justify-between">
-          <CardTitle className="text-base font-semibold">최근 캠페인 성과</CardTitle>
+          <CardTitle id="recent-campaigns-heading" className="text-base font-semibold">최근 개인화 캠페인 성과</CardTitle>
           <Button variant="ghost" size="sm" asChild>
             <Link to="/campaigns">
               전체 보기 <ArrowRight className="ml-1 h-3 w-3" />
