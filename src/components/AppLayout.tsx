@@ -1,10 +1,22 @@
 import { ReactNode } from "react";
-import { Bell, Search } from "lucide-react";
+import { useNavigate } from "react-router-dom";
+import { Bell, Search, LogOut, Shield, User as UserIcon } from "lucide-react";
 import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
 import { AppSidebar } from "@/components/AppSidebar";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import { Badge } from "@/components/ui/badge";
+import { useAuth } from "@/contexts/AuthContext";
+import { toast } from "sonner";
 
 interface AppLayoutProps {
   children: ReactNode;
@@ -14,6 +26,20 @@ interface AppLayoutProps {
 }
 
 export default function AppLayout({ children, title, description, action }: AppLayoutProps) {
+  const { user, isAdmin, signOut } = useAuth();
+  const navigate = useNavigate();
+
+  const handleSignOut = async () => {
+    await signOut();
+    toast.success("로그아웃되었습니다");
+    navigate("/auth", { replace: true });
+  };
+
+  const initials = (user?.user_metadata?.display_name || user?.email || "?")
+    .toString()
+    .slice(0, 2)
+    .toUpperCase();
+
   return (
     <SidebarProvider>
       <div className="min-h-screen flex w-full bg-gradient-subtle">
@@ -34,11 +60,45 @@ export default function AppLayout({ children, title, description, action }: AppL
                 <Bell className="h-4 w-4" />
                 <span className="absolute top-2 right-2 h-2 w-2 rounded-full bg-primary" />
               </Button>
-              <Avatar className="h-8 w-8">
-                <AvatarFallback className="bg-gradient-primary text-primary-foreground text-xs font-semibold">
-                  MK
-                </AvatarFallback>
-              </Avatar>
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <button className="flex items-center gap-2 rounded-full focus:outline-none focus:ring-2 focus:ring-ring">
+                    <Avatar className="h-8 w-8">
+                      <AvatarFallback className="bg-gradient-primary text-primary-foreground text-xs font-semibold">
+                        {initials}
+                      </AvatarFallback>
+                    </Avatar>
+                  </button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent align="end" className="w-56">
+                  <DropdownMenuLabel>
+                    <div className="flex flex-col gap-1">
+                      <span className="text-sm font-medium truncate">
+                        {user?.user_metadata?.display_name || user?.email}
+                      </span>
+                      <span className="text-xs text-muted-foreground truncate">{user?.email}</span>
+                      {isAdmin && (
+                        <Badge className="w-fit mt-1 bg-primary/10 text-primary hover:bg-primary/10 gap-1 text-[10px]">
+                          <Shield className="h-2.5 w-2.5" /> 관리자
+                        </Badge>
+                      )}
+                    </div>
+                  </DropdownMenuLabel>
+                  <DropdownMenuSeparator />
+                  {isAdmin && (
+                    <DropdownMenuItem onClick={() => navigate("/admin")}>
+                      <Shield className="mr-2 h-4 w-4" /> 관리자 페이지
+                    </DropdownMenuItem>
+                  )}
+                  <DropdownMenuItem disabled>
+                    <UserIcon className="mr-2 h-4 w-4" /> 내 계정
+                  </DropdownMenuItem>
+                  <DropdownMenuSeparator />
+                  <DropdownMenuItem onClick={handleSignOut} className="text-destructive">
+                    <LogOut className="mr-2 h-4 w-4" /> 로그아웃
+                  </DropdownMenuItem>
+                </DropdownMenuContent>
+              </DropdownMenu>
             </div>
           </header>
           <main className="flex-1 p-4 md:p-8">
