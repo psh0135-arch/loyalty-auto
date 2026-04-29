@@ -162,7 +162,7 @@ export default function Events() {
   const profile = selected ? customerProfiles[selected] || defaultProfile(selected) : null;
 
   return (
-    <AppLayout title="고객 이벤트" description="실시간 고객 행동 로그를 확인하세요">
+    <AppLayout title="고객 행동 이벤트 로그" description="실시간 고객 행동 트리거 데이터를 확인하세요">
       <Card className="shadow-card mb-4">
         <CardContent className="p-4 flex flex-col md:flex-row gap-3">
           <div className="relative flex-1">
