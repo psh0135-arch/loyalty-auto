@@ -278,6 +278,19 @@ export default function NewCampaign() {
                 <p className="text-sm font-medium">
                   {triggers.find((t) => t.id === trigger)?.label || "—"}
                 </p>
+                {trigger === "cart" && (
+                  <p className="text-xs text-muted-foreground mt-1">
+                    이탈 후 {cartHours}시간 뒤 발송 · 최근 {purchaseDays}일 내 구매자 제외
+                  </p>
+                )}
+                {trigger === "inactive" && (
+                  <p className="text-xs text-muted-foreground mt-1">{inactiveDays}일 이상 미접속</p>
+                )}
+                {trigger === "category" && (
+                  <p className="text-xs text-muted-foreground mt-1">
+                    {categoryName || "카테고리"} {categoryViews}회 이상 조회
+                  </p>
+                )}
               </div>
               <div>
                 <p className="text-xs text-muted-foreground mb-1">채널</p>
