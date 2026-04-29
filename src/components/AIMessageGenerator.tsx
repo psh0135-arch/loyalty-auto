@@ -11,7 +11,8 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { Sparkles, Wand2, Clock, Loader2 } from "lucide-react";
+import { Sparkles, Wand2, Clock, Loader2, Eye } from "lucide-react";
+import { MessagePreview } from "@/components/MessagePreview";
 import { toast } from "sonner";
 import {
   BrandTone,
@@ -223,6 +224,21 @@ export function AIMessageGenerator({ defaultChannel = "push", defaultGoal = "" }
                   className="bg-card"
                 />
               </div>
+            </div>
+
+            <div className="pt-4 border-t border-primary/20">
+              <div className="flex items-center gap-2 mb-3">
+                <Eye className="h-3.5 w-3.5 text-primary" />
+                <p className="text-xs font-semibold uppercase tracking-wide text-primary">
+                  실시간 미리보기 ({channel === "push" ? "푸시" : channel === "email" ? "이메일" : "SMS"})
+                </p>
+              </div>
+              <MessagePreview
+                channel={channel}
+                title={result.title}
+                body={result.body}
+                cta={result.cta}
+              />
             </div>
           </div>
         )}
