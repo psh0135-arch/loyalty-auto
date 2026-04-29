@@ -23,7 +23,7 @@ export default function Welcome() {
           <span className="text-xl font-bold tracking-tight">AI CRM Automation</span>
         </div>
 
-        <h1 className="text-5xl md:text-6xl font-bold tracking-tight mb-6 bg-gradient-to-br from-foreground to-foreground/70 bg-clip-text text-transparent">
+        <h1 className="text-5xl md:text-6xl font-bold tracking-tight mb-6 bg-gradient-primary bg-clip-text text-transparent">
           AI CRM 자동화로 시작하는<br />개인화 캠페인
         </h1>
         <p className="text-base md:text-lg text-muted-foreground mb-10 max-w-lg mx-auto font-medium">
