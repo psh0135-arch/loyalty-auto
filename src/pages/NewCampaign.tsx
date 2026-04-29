@@ -115,7 +115,7 @@ export default function NewCampaign() {
               <CardTitle className="text-base">트리거 선택</CardTitle>
               <CardDescription>캠페인이 발동될 고객 행동 조건</CardDescription>
             </CardHeader>
-            <CardContent>
+            <CardContent className="space-y-4">
               <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
                 {triggers.map((t) => (
                   <OptionCard
@@ -128,6 +128,90 @@ export default function NewCampaign() {
                   />
                 ))}
               </div>
+
+              {trigger && (
+                <div className="rounded-lg border border-border bg-secondary/40 p-4">
+                  <p className="text-xs font-semibold uppercase tracking-wide text-muted-foreground mb-3">
+                    상세 조건
+                  </p>
+                  {trigger === "cart" && (
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                      <div className="space-y-2">
+                        <Label htmlFor="cartHours">이탈 후 발송 시간</Label>
+                        <div className="flex items-center gap-2">
+                          <Input
+                            id="cartHours"
+                            type="number"
+                            min={1}
+                            value={cartHours}
+                            onChange={(e) => setCartHours(e.target.value)}
+                            className="bg-card"
+                          />
+                          <span className="text-sm text-muted-foreground whitespace-nowrap">시간 후</span>
+                        </div>
+                      </div>
+                      <div className="space-y-2">
+                        <Label htmlFor="purchaseDays">최근 구매 제외 기간</Label>
+                        <div className="flex items-center gap-2">
+                          <Input
+                            id="purchaseDays"
+                            type="number"
+                            min={0}
+                            value={purchaseDays}
+                            onChange={(e) => setPurchaseDays(e.target.value)}
+                            className="bg-card"
+                          />
+                          <span className="text-sm text-muted-foreground whitespace-nowrap">일 이내 구매자 제외</span>
+                        </div>
+                      </div>
+                    </div>
+                  )}
+                  {trigger === "inactive" && (
+                    <div className="space-y-2 max-w-sm">
+                      <Label htmlFor="inactiveDays">미접속 일수</Label>
+                      <div className="flex items-center gap-2">
+                        <Input
+                          id="inactiveDays"
+                          type="number"
+                          min={1}
+                          value={inactiveDays}
+                          onChange={(e) => setInactiveDays(e.target.value)}
+                          className="bg-card"
+                        />
+                        <span className="text-sm text-muted-foreground whitespace-nowrap">일 이상 미접속</span>
+                      </div>
+                    </div>
+                  )}
+                  {trigger === "category" && (
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                      <div className="space-y-2">
+                        <Label htmlFor="categoryName">대상 카테고리</Label>
+                        <Input
+                          id="categoryName"
+                          placeholder="예: 뷰티"
+                          value={categoryName}
+                          onChange={(e) => setCategoryName(e.target.value)}
+                          className="bg-card"
+                        />
+                      </div>
+                      <div className="space-y-2">
+                        <Label htmlFor="categoryViews">조회 횟수</Label>
+                        <div className="flex items-center gap-2">
+                          <Input
+                            id="categoryViews"
+                            type="number"
+                            min={1}
+                            value={categoryViews}
+                            onChange={(e) => setCategoryViews(e.target.value)}
+                            className="bg-card"
+                          />
+                          <span className="text-sm text-muted-foreground whitespace-nowrap">회 이상 (7일 내)</span>
+                        </div>
+                      </div>
+                    </div>
+                  )}
+                </div>
+              )}
             </CardContent>
           </Card>
 
