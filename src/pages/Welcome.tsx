@@ -24,11 +24,12 @@ export default function Welcome() {
         </div>
 
         <h1 className="text-5xl md:text-6xl font-bold tracking-tight mb-6 bg-gradient-to-br from-foreground to-foreground/70 bg-clip-text text-transparent">
-          환영합니다
+          AI CRM 자동화로 시작하는<br />개인화 캠페인
         </h1>
         <p className="text-base md:text-lg text-muted-foreground mb-10 max-w-lg mx-auto font-medium">
-          AI 기반 개인화 CRM 자동화 플랫폼
+          고객 행동 트리거 기반 푸시·이메일·SMS 캠페인을 자동화하고 성과를 한눈에 측정하세요.
         </p>
+        <h2 className="sr-only">AI CRM Automation 환영 페이지</h2>
 
         <div className="flex flex-col sm:flex-row gap-3 justify-center items-center">
           <Button asChild size="lg" className="bg-gradient-primary shadow-elevated min-w-[180px]">
