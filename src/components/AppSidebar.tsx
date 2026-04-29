@@ -1,5 +1,5 @@
 import { NavLink, useLocation } from "react-router-dom";
-import { LayoutDashboard, Megaphone, PlusCircle, Sparkles } from "lucide-react";
+import { LayoutDashboard, Megaphone, PlusCircle, Sparkles, Activity } from "lucide-react";
 import {
   Sidebar,
   SidebarContent,
@@ -17,6 +17,7 @@ const items = [
   { title: "대시보드", url: "/", icon: LayoutDashboard },
   { title: "캠페인", url: "/campaigns", icon: Megaphone },
   { title: "캠페인 생성", url: "/campaigns/new", icon: PlusCircle },
+  { title: "고객 이벤트", url: "/events", icon: Activity },
 ];
 
 export function AppSidebar() {
