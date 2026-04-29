@@ -12,3 +12,10 @@ Allow: /
 
 User-agent: *
 Allow: /
+Disallow: /dashboard
+Disallow: /campaigns
+Disallow: /events
+Disallow: /analytics
+Disallow: /admin
+
+Sitemap: https://loyalty-auto.lovable.app/sitemap.xml
