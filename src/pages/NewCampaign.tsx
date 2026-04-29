@@ -67,6 +67,12 @@ export default function NewCampaign() {
   const [trigger, setTrigger] = useState<string>("");
   const [channel, setChannel] = useState<string>("");
   const [goal, setGoal] = useState<string>("");
+  // Trigger-specific conditions
+  const [cartHours, setCartHours] = useState("3");
+  const [categoryName, setCategoryName] = useState("");
+  const [categoryViews, setCategoryViews] = useState("3");
+  const [inactiveDays, setInactiveDays] = useState("30");
+  const [purchaseDays, setPurchaseDays] = useState("7");
 
   const handleSave = () => {
     if (!name || !trigger || !channel || !goal) {
