@@ -163,6 +163,7 @@ export default function Events() {
 
   return (
     <AppLayout title="고객 행동 이벤트 로그" description="실시간 고객 행동 트리거 데이터를 확인하세요">
+      <h2 className="sr-only">이벤트 검색 및 필터</h2>
       <Card className="shadow-card mb-4">
         <CardContent className="p-4 flex flex-col md:flex-row gap-3">
           <div className="relative flex-1">
