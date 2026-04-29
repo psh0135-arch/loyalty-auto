@@ -191,6 +191,7 @@ export default function Events() {
         </CardContent>
       </Card>
 
+      <h2 className="sr-only">실시간 고객 이벤트 로그</h2>
       <Card className="shadow-card">
         <CardContent className="p-0">
           {filtered.length === 0 ? (
