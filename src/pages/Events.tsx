@@ -26,8 +26,9 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { Eye, ShoppingCart, CheckCircle2, LogOut, Smartphone, MousePointerClick, Search, LucideIcon } from "lucide-react";
+import { Eye, ShoppingCart, CheckCircle2, LogOut, Smartphone, MousePointerClick, Search, Activity, LucideIcon } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { EmptyState } from "@/components/EmptyState";
 
 type EventType = "view" | "add_cart" | "purchase" | "cart_abandon" | "app_open" | "push_click";
 
@@ -191,52 +192,61 @@ export default function Events() {
 
       <Card className="shadow-card">
         <CardContent className="p-0">
-          <div className="overflow-x-auto">
-            <Table>
-              <TableHeader>
-                <TableRow className="bg-secondary/40 hover:bg-secondary/40">
-                  <TableHead>고객 ID</TableHead>
-                  <TableHead>이벤트 유형</TableHead>
-                  <TableHead>카테고리</TableHead>
-                  <TableHead>상품 ID</TableHead>
-                  <TableHead>발생 시간</TableHead>
-                  <TableHead className="text-right">상세</TableHead>
-                </TableRow>
-              </TableHeader>
-              <TableBody>
-                {filtered.map((e) => {
-                  const meta = eventMeta[e.type];
-                  const Icon = meta.icon;
-                  return (
-                    <TableRow key={e.id} className="hover:bg-secondary/30">
-                      <TableCell className="font-mono text-xs font-medium">{e.customerId}</TableCell>
-                      <TableCell>
-                        <Badge variant="secondary" className={cn("gap-1 font-normal", meta.color)}>
-                          <Icon className="h-3 w-3" />
-                          {meta.label}
-                        </Badge>
-                      </TableCell>
-                      <TableCell className="text-muted-foreground">{e.category}</TableCell>
-                      <TableCell className="font-mono text-xs text-muted-foreground">{e.productId}</TableCell>
-                      <TableCell className="text-muted-foreground text-sm">{e.occurredAt}</TableCell>
-                      <TableCell className="text-right">
-                        <Button variant="ghost" size="sm" onClick={() => setSelected(e.customerId)}>
-                          보기
-                        </Button>
-                      </TableCell>
-                    </TableRow>
-                  );
-                })}
-                {filtered.length === 0 && (
-                  <TableRow>
-                    <TableCell colSpan={6} className="text-center text-muted-foreground py-12">
-                      조건에 맞는 이벤트가 없습니다
-                    </TableCell>
+          {filtered.length === 0 ? (
+            events.length === 0 ? (
+              <EmptyState
+                icon={Activity}
+                title="아직 수집된 이벤트가 없어요"
+                description="고객의 행동 데이터가 들어오면 이곳에 실시간으로 표시됩니다."
+              />
+            ) : (
+              <EmptyState
+                icon={Search}
+                title="조건에 맞는 이벤트가 없어요"
+                description="검색어나 이벤트 유형 필터를 변경해보세요."
+              />
+            )
+          ) : (
+            <div className="overflow-x-auto">
+              <Table>
+                <TableHeader>
+                  <TableRow className="bg-secondary/40 hover:bg-secondary/40">
+                    <TableHead>고객 ID</TableHead>
+                    <TableHead>이벤트 유형</TableHead>
+                    <TableHead className="hidden md:table-cell">카테고리</TableHead>
+                    <TableHead className="hidden lg:table-cell">상품 ID</TableHead>
+                    <TableHead className="hidden sm:table-cell">발생 시간</TableHead>
+                    <TableHead className="text-right">상세</TableHead>
                   </TableRow>
-                )}
-              </TableBody>
-            </Table>
-          </div>
+                </TableHeader>
+                <TableBody>
+                  {filtered.map((e) => {
+                    const meta = eventMeta[e.type];
+                    const Icon = meta.icon;
+                    return (
+                      <TableRow key={e.id} className="hover:bg-secondary/30">
+                        <TableCell className="font-mono text-xs font-medium">{e.customerId}</TableCell>
+                        <TableCell>
+                          <Badge variant="secondary" className={cn("gap-1 font-normal", meta.color)}>
+                            <Icon className="h-3 w-3" />
+                            {meta.label}
+                          </Badge>
+                        </TableCell>
+                        <TableCell className="text-muted-foreground hidden md:table-cell">{e.category}</TableCell>
+                        <TableCell className="font-mono text-xs text-muted-foreground hidden lg:table-cell">{e.productId}</TableCell>
+                        <TableCell className="text-muted-foreground text-sm hidden sm:table-cell">{e.occurredAt}</TableCell>
+                        <TableCell className="text-right">
+                          <Button variant="ghost" size="sm" onClick={() => setSelected(e.customerId)}>
+                            보기
+                          </Button>
+                        </TableCell>
+                      </TableRow>
+                    );
+                  })}
+                </TableBody>
+              </Table>
+            </div>
+          )}
         </CardContent>
       </Card>
 

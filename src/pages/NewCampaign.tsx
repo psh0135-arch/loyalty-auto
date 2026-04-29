@@ -76,22 +76,60 @@ export default function NewCampaign() {
   const [inactiveDays, setInactiveDays] = useState("30");
   const [purchaseDays, setPurchaseDays] = useState("7");
 
-  const handleSave = () => {
-    if (!name || !trigger || !channel || !goal) {
-      toast.error("모든 항목을 입력해주세요");
+  const handleSave = (asDraft = false) => {
+    if (!asDraft && (!name || !trigger || !channel || !goal)) {
+      toast.error("모든 항목을 입력해주세요", {
+        description: "캠페인명, 트리거, 채널, 목표는 필수입니다.",
+      });
       return;
     }
-    toast.success("캠페인이 저장되었습니다", {
-      description: `${name} 캠페인이 생성되었습니다.`,
+    if (asDraft && !name) {
+      toast.error("캠페인명을 입력해주세요");
+      return;
+    }
+    toast.success(asDraft ? "초안으로 저장되었습니다" : "캠페인이 저장되었습니다", {
+      description: `${name}${asDraft ? " (초안)" : ""} 캠페인이 캠페인 목록에 추가되었습니다.`,
+      action: { label: "성과 보기", onClick: () => navigate("/analytics") },
     });
     setTimeout(() => navigate("/campaigns"), 600);
   };
+
+  const steps = [
+    { label: "기본 정보", done: !!name },
+    { label: "트리거", done: !!trigger },
+    { label: "채널", done: !!channel },
+    { label: "목표", done: !!goal },
+  ];
+  const completed = steps.filter((s) => s.done).length;
 
   return (
     <AppLayout
       title="캠페인 생성"
       description="AI가 고객 행동에 맞는 개인화 메시지를 생성합니다"
     >
+      <div className="mb-6 flex flex-wrap items-center gap-2 text-xs">
+        {steps.map((s, i) => (
+          <div key={s.label} className="flex items-center gap-2">
+            <div
+              className={cn(
+                "flex h-6 w-6 items-center justify-center rounded-full border text-[11px] font-semibold",
+                s.done
+                  ? "bg-primary text-primary-foreground border-primary"
+                  : "bg-card text-muted-foreground border-border",
+              )}
+            >
+              {i + 1}
+            </div>
+            <span className={cn("font-medium", s.done ? "text-foreground" : "text-muted-foreground")}>
+              {s.label}
+            </span>
+            {i < steps.length - 1 && <div className="w-6 h-px bg-border" />}
+          </div>
+        ))}
+        <span className="ml-auto text-muted-foreground">
+          {completed}/{steps.length} 완료
+        </span>
+      </div>
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         <div className="lg:col-span-2 space-y-6">
           <Card className="shadow-card">
@@ -313,8 +351,14 @@ export default function NewCampaign() {
               </div>
 
               <div className="flex flex-col gap-2 pt-4 border-t border-border">
-                <Button onClick={handleSave} className="bg-gradient-primary shadow-elevated">
-                  저장
+                <Button
+                  onClick={() => handleSave(false)}
+                  className="bg-gradient-primary shadow-elevated"
+                >
+                  캠페인 저장 및 활성화
+                </Button>
+                <Button variant="outline" onClick={() => handleSave(true)}>
+                  초안으로 저장
                 </Button>
                 <Button variant="ghost" onClick={() => navigate("/campaigns")}>
                   취소
