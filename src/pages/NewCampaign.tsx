@@ -8,6 +8,8 @@ import { Label } from "@/components/ui/label";
 import { Bell, Mail, MessageSquare, ShoppingCart, MoonStar, Eye, Target, Repeat, Star, Sparkles, LucideIcon } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { toast } from "sonner";
+import { AIMessageGenerator } from "@/components/AIMessageGenerator";
+import { MessageChannel } from "@/services/aiMessage";
 
 interface OptionCardProps {
   icon: LucideIcon;
@@ -256,6 +258,11 @@ export default function NewCampaign() {
               </div>
             </CardContent>
           </Card>
+
+          <AIMessageGenerator
+            defaultChannel={(channel as MessageChannel) || "push"}
+            defaultGoal={goals.find((g) => g.id === goal)?.label || ""}
+          />
         </div>
 
         <div className="lg:col-span-1">
