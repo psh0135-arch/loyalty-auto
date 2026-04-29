@@ -23,7 +23,7 @@ export default function Auth() {
   const { user, loading } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
-  const from = (location.state as { from?: string })?.from || "/";
+  const from = (location.state as { from?: string })?.from || "/dashboard";
 
   const [tab, setTab] = useState("signin");
   const [email, setEmail] = useState("");
@@ -79,7 +79,7 @@ export default function Auth() {
     toast.success("가입이 완료되었습니다", {
       description: "첫 가입자는 자동으로 관리자 권한을 받습니다.",
     });
-    navigate("/", { replace: true });
+    navigate("/dashboard", { replace: true });
   };
 
   return (
