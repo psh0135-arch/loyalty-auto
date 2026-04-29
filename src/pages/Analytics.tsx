@@ -201,14 +201,17 @@ export default function Analytics() {
           </ResponsiveContainer>
         </CardContent>
       </Card>
+      </section>
 
       {/* AI Insights */}
-      <Card className="shadow-card mb-6 border-primary/20">
+      <section aria-labelledby="ai-insights-heading" className="mb-6">
+        <h2 id="ai-insights-heading" className="sr-only">AI 인사이트</h2>
+      <Card className="shadow-card border-primary/20">
         <CardHeader className="flex flex-row items-center gap-2">
           <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-gradient-primary">
             <Sparkles className="h-4 w-4 text-primary-foreground" />
           </div>
-          <CardTitle className="text-base font-semibold">AI 인사이트</CardTitle>
+          <CardTitle className="text-base font-semibold">AI 캠페인 인사이트</CardTitle>
         </CardHeader>
         <CardContent>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
@@ -229,8 +232,11 @@ export default function Analytics() {
           </div>
         </CardContent>
       </Card>
+      </section>
 
       {/* Campaigns Table */}
+      <section aria-labelledby="campaigns-table-heading">
+        <h2 id="campaigns-table-heading" className="sr-only">캠페인별 상세 성과</h2>
       <Card className="shadow-card">
         <CardHeader>
           <CardTitle className="text-base font-semibold">캠페인별 성과</CardTitle>
