@@ -173,9 +173,12 @@ export default function Analytics() {
             </ResponsiveContainer>
           </CardContent>
         </Card>
-      </div>
+        </div>
+      </section>
 
-      <Card className="shadow-card mb-6">
+      <section aria-labelledby="cvr-heading" className="mb-6">
+        <h2 id="cvr-heading" className="sr-only">캠페인별 전환율 비교</h2>
+      <Card className="shadow-card">
         <CardHeader>
           <CardTitle className="text-base font-semibold">캠페인별 전환율 비교</CardTitle>
         </CardHeader>
