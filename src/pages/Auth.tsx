@@ -255,6 +255,73 @@ export default function Auth() {
           </CardContent>
         </Card>
       </div>
+
+      {/* 비밀번호 찾기 다이얼로그 */}
+      <Dialog open={resetOpen} onOpenChange={setResetOpen}>
+        <DialogContent>
+          <DialogHeader>
+            <DialogTitle>비밀번호 재설정</DialogTitle>
+            <DialogDescription>
+              가입한 이메일을 입력하면 재설정 링크를 보내드립니다.
+            </DialogDescription>
+          </DialogHeader>
+          <form onSubmit={handleResetPassword} className="space-y-4">
+            <div className="space-y-2">
+              <Label htmlFor="reset-email">이메일</Label>
+              <Input
+                id="reset-email"
+                type="email"
+                autoComplete="email"
+                value={resetEmail}
+                onChange={(e) => setResetEmail(e.target.value)}
+                placeholder="you@example.com"
+              />
+            </div>
+            <DialogFooter>
+              <Button
+                type="submit"
+                disabled={resetSubmitting}
+                className="w-full bg-gradient-primary shadow-elevated"
+              >
+                {resetSubmitting && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
+                재설정 링크 보내기
+              </Button>
+            </DialogFooter>
+          </form>
+        </DialogContent>
+      </Dialog>
+
+      {/* 이메일 찾기 안내 다이얼로그 */}
+      <Dialog open={findEmailOpen} onOpenChange={setFindEmailOpen}>
+        <DialogContent>
+          <DialogHeader>
+            <DialogTitle>이메일 찾기</DialogTitle>
+            <DialogDescription>
+              보안 정책상 가입 이메일을 직접 조회해 드릴 수 없습니다.
+            </DialogDescription>
+          </DialogHeader>
+          <div className="space-y-3 text-sm text-muted-foreground">
+            <p>다음 방법으로 이메일을 확인해 주세요:</p>
+            <ul className="list-disc pl-5 space-y-1">
+              <li>가입 시 받았던 환영 메일을 검색</li>
+              <li>관리자에게 등록된 이메일 확인 요청</li>
+              <li>대표 이메일 주소를 모두 시도하여 비밀번호 재설정 메일 수신 여부 확인</li>
+            </ul>
+          </div>
+          <DialogFooter>
+            <Button
+              variant="outline"
+              className="w-full"
+              onClick={() => {
+                setFindEmailOpen(false);
+                setResetOpen(true);
+              }}
+            >
+              비밀번호 재설정으로 이동
+            </Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
     </div>
   );
 }
