@@ -317,7 +317,7 @@ export default function Auth() {
               <li>대표 이메일 주소를 모두 시도하여 비밀번호 재설정 메일 수신 여부 확인</li>
             </ul>
           </div>
-          <DialogFooter>
+          <div className="pt-2">
             <Button
               variant="outline"
               className="w-full"
@@ -328,7 +328,7 @@ export default function Auth() {
             >
               비밀번호 재설정으로 이동
             </Button>
-          </DialogFooter>
+          </div>
         </DialogContent>
       </Dialog>
     </div>
