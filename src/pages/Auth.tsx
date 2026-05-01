@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link, Navigate, useLocation, useNavigate } from "react-router-dom";
 import { z } from "zod";
 import { supabase } from "@/integrations/supabase/client";
@@ -8,7 +8,16 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Sparkles, Loader2 } from "lucide-react";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
+import { Sparkles, Loader2, KeyRound, Mail } from "lucide-react";
 import { toast } from "sonner";
 import { Aurora } from "@/components/Aurora";
 
@@ -30,6 +39,41 @@ export default function Auth() {
   const [password, setPassword] = useState("");
   const [displayName, setDisplayName] = useState("");
   const [submitting, setSubmitting] = useState(false);
+
+  const [resetOpen, setResetOpen] = useState(false);
+  const [resetEmail, setResetEmail] = useState("");
+  const [resetSubmitting, setResetSubmitting] = useState(false);
+  const [findEmailOpen, setFindEmailOpen] = useState(false);
+
+  const handleResetPassword = async (e: React.FormEvent) => {
+    e.preventDefault();
+    const parse = emailSchema.safeParse(resetEmail);
+    if (!parse.success) return toast.error(parse.error.issues[0].message);
+
+    setResetSubmitting(true);
+    const { error } = await supabase.auth.resetPasswordForEmail(parse.data, {
+      redirectTo: `${window.location.origin}/reset-password`,
+    });
+    setResetSubmitting(false);
+    if (error) {
+      toast.error("재설정 메일 발송 실패", { description: error.message });
+      return;
+    }
+    toast.success("재설정 링크를 이메일로 보냈습니다", {
+      description: "메일함을 확인하세요. (스팸함 포함)",
+    });
+    setResetOpen(false);
+    setResetEmail("");
+  };
+
+  useEffect(() => {
+    const params = new URLSearchParams(location.search);
+    const help = params.get("help");
+    if (help === "reset") setResetOpen(true);
+    else if (help === "find-email") setFindEmailOpen(true);
+    const t = params.get("tab");
+    if (t === "signin" || t === "signup") setTab(t);
+  }, [location.search]);
 
   if (!loading && user) return <Navigate to={from} replace />;
 
@@ -145,6 +189,25 @@ export default function Auth() {
                     {submitting && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
                     로그인
                   </Button>
+                  <div className="flex items-center justify-between text-xs pt-1">
+                    <button
+                      type="button"
+                      onClick={() => setFindEmailOpen(true)}
+                      className="text-muted-foreground hover:text-foreground inline-flex items-center gap-1"
+                    >
+                      <Mail className="h-3 w-3" /> 이메일 찾기
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setResetEmail(email);
+                        setResetOpen(true);
+                      }}
+                      className="text-muted-foreground hover:text-foreground inline-flex items-center gap-1"
+                    >
+                      <KeyRound className="h-3 w-3" /> 비밀번호 찾기
+                    </button>
+                  </div>
                 </form>
               </TabsContent>
 
@@ -201,6 +264,73 @@ export default function Auth() {
           </CardContent>
         </Card>
       </div>
+
+      {/* 비밀번호 찾기 다이얼로그 */}
+      <Dialog open={resetOpen} onOpenChange={setResetOpen}>
+        <DialogContent>
+          <DialogHeader>
+            <DialogTitle>비밀번호 재설정</DialogTitle>
+            <DialogDescription>
+              가입한 이메일을 입력하면 재설정 링크를 보내드립니다.
+            </DialogDescription>
+          </DialogHeader>
+          <form onSubmit={handleResetPassword} className="space-y-4">
+            <div className="space-y-2">
+              <Label htmlFor="reset-email">이메일</Label>
+              <Input
+                id="reset-email"
+                type="email"
+                autoComplete="email"
+                value={resetEmail}
+                onChange={(e) => setResetEmail(e.target.value)}
+                placeholder="you@example.com"
+              />
+            </div>
+            <DialogFooter>
+              <Button
+                type="submit"
+                disabled={resetSubmitting}
+                className="w-full bg-gradient-primary shadow-elevated"
+              >
+                {resetSubmitting && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
+                재설정 링크 보내기
+              </Button>
+            </DialogFooter>
+          </form>
+        </DialogContent>
+      </Dialog>
+
+      {/* 이메일 찾기 안내 다이얼로그 */}
+      <Dialog open={findEmailOpen} onOpenChange={setFindEmailOpen}>
+        <DialogContent>
+          <DialogHeader>
+            <DialogTitle>이메일 찾기</DialogTitle>
+            <DialogDescription>
+              보안 정책상 가입 이메일을 직접 조회해 드릴 수 없습니다.
+            </DialogDescription>
+          </DialogHeader>
+          <div className="space-y-3 text-sm text-muted-foreground">
+            <p>다음 방법으로 이메일을 확인해 주세요:</p>
+            <ul className="list-disc pl-5 space-y-1">
+              <li>가입 시 받았던 환영 메일을 검색</li>
+              <li>관리자에게 등록된 이메일 확인 요청</li>
+              <li>대표 이메일 주소를 모두 시도하여 비밀번호 재설정 메일 수신 여부 확인</li>
+            </ul>
+          </div>
+          <DialogFooter>
+            <Button
+              variant="outline"
+              className="w-full"
+              onClick={() => {
+                setFindEmailOpen(false);
+                setResetOpen(true);
+              }}
+            >
+              비밀번호 재설정으로 이동
+            </Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
     </div>
   );
 }
