@@ -286,7 +286,7 @@ export default function Auth() {
                 placeholder="you@example.com"
               />
             </div>
-            <DialogFooter>
+            <div className="pt-2">
               <Button
                 type="submit"
                 disabled={resetSubmitting}
@@ -295,7 +295,7 @@ export default function Auth() {
                 {resetSubmitting && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
                 재설정 링크 보내기
               </Button>
-            </DialogFooter>
+            </div>
           </form>
         </DialogContent>
       </Dialog>
