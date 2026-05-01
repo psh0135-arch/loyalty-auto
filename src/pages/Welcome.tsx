@@ -1,5 +1,5 @@
 import { Link, Navigate } from "react-router-dom";
-import { Sparkles, ArrowRight } from "lucide-react";
+import { Sparkles, ArrowRight, KeyRound, Mail } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Aurora } from "@/components/Aurora";
 import { useAuth } from "@/contexts/AuthContext";
