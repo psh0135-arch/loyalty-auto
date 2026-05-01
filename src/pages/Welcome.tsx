@@ -42,6 +42,29 @@ export default function Welcome() {
             <Link to="/auth?tab=signin">로그인</Link>
           </Button>
         </div>
+
+        <nav aria-label="계정 도움말" className="mt-6 flex flex-wrap gap-4 justify-center text-sm">
+          <Link
+            to="/auth?help=find-email"
+            className="inline-flex items-center gap-1.5 text-muted-foreground hover:text-foreground transition-colors"
+          >
+            <Mail className="h-4 w-4" /> 이메일 찾기
+          </Link>
+          <span className="text-muted-foreground/40">·</span>
+          <Link
+            to="/auth?help=reset"
+            className="inline-flex items-center gap-1.5 text-muted-foreground hover:text-foreground transition-colors"
+          >
+            <KeyRound className="h-4 w-4" /> 비밀번호 찾기
+          </Link>
+          <span className="text-muted-foreground/40">·</span>
+          <Link
+            to="/reset-password"
+            className="inline-flex items-center gap-1.5 text-muted-foreground hover:text-foreground transition-colors"
+          >
+            <KeyRound className="h-4 w-4" /> 비밀번호 변경
+          </Link>
+        </nav>
       </div>
     </div>
   );
