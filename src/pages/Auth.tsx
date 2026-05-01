@@ -12,10 +12,8 @@ import {
   Dialog,
   DialogContent,
   DialogDescription,
-  DialogFooter,
   DialogHeader,
   DialogTitle,
-  DialogTrigger,
 } from "@/components/ui/dialog";
 import { Sparkles, Loader2, KeyRound, Mail } from "lucide-react";
 import { toast } from "sonner";
