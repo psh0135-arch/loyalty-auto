@@ -66,6 +66,15 @@ export default function Auth() {
     setResetEmail("");
   };
 
+  useEffect(() => {
+    const params = new URLSearchParams(location.search);
+    const help = params.get("help");
+    if (help === "reset") setResetOpen(true);
+    else if (help === "find-email") setFindEmailOpen(true);
+    const t = params.get("tab");
+    if (t === "signin" || t === "signup") setTab(t);
+  }, [location.search]);
+
   if (!loading && user) return <Navigate to={from} replace />;
 
   const handleSignIn = async (e: React.FormEvent) => {
