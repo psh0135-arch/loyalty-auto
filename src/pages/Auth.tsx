@@ -180,6 +180,25 @@ export default function Auth() {
                     {submitting && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
                     로그인
                   </Button>
+                  <div className="flex items-center justify-between text-xs pt-1">
+                    <button
+                      type="button"
+                      onClick={() => setFindEmailOpen(true)}
+                      className="text-muted-foreground hover:text-foreground inline-flex items-center gap-1"
+                    >
+                      <Mail className="h-3 w-3" /> 이메일 찾기
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setResetEmail(email);
+                        setResetOpen(true);
+                      }}
+                      className="text-muted-foreground hover:text-foreground inline-flex items-center gap-1"
+                    >
+                      <KeyRound className="h-3 w-3" /> 비밀번호 찾기
+                    </button>
+                  </div>
                 </form>
               </TabsContent>
 
