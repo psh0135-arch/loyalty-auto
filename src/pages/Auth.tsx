@@ -40,6 +40,32 @@ export default function Auth() {
   const [displayName, setDisplayName] = useState("");
   const [submitting, setSubmitting] = useState(false);
 
+  const [resetOpen, setResetOpen] = useState(false);
+  const [resetEmail, setResetEmail] = useState("");
+  const [resetSubmitting, setResetSubmitting] = useState(false);
+  const [findEmailOpen, setFindEmailOpen] = useState(false);
+
+  const handleResetPassword = async (e: React.FormEvent) => {
+    e.preventDefault();
+    const parse = emailSchema.safeParse(resetEmail);
+    if (!parse.success) return toast.error(parse.error.issues[0].message);
+
+    setResetSubmitting(true);
+    const { error } = await supabase.auth.resetPasswordForEmail(parse.data, {
+      redirectTo: `${window.location.origin}/reset-password`,
+    });
+    setResetSubmitting(false);
+    if (error) {
+      toast.error("재설정 메일 발송 실패", { description: error.message });
+      return;
+    }
+    toast.success("재설정 링크를 이메일로 보냈습니다", {
+      description: "메일함을 확인하세요. (스팸함 포함)",
+    });
+    setResetOpen(false);
+    setResetEmail("");
+  };
+
   if (!loading && user) return <Navigate to={from} replace />;
 
   const handleSignIn = async (e: React.FormEvent) => {
