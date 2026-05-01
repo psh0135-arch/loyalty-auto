@@ -1,6 +1,7 @@
 import { ReactNode } from "react";
 import { useNavigate } from "react-router-dom";
-import { Bell, Search, LogOut, Shield, User as UserIcon } from "lucide-react";
+import { Search, LogOut, Shield, User as UserIcon } from "lucide-react";
+import { NotificationBell } from "@/components/NotificationBell";
 import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
 import { AppSidebar } from "@/components/AppSidebar";
 import { Input } from "@/components/ui/input";
