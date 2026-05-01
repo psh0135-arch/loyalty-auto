@@ -12,10 +12,8 @@ import {
   Dialog,
   DialogContent,
   DialogDescription,
-  DialogFooter,
   DialogHeader,
   DialogTitle,
-  DialogTrigger,
 } from "@/components/ui/dialog";
 import { Sparkles, Loader2, KeyRound, Mail } from "lucide-react";
 import { toast } from "sonner";
@@ -286,7 +284,7 @@ export default function Auth() {
                 placeholder="you@example.com"
               />
             </div>
-            <DialogFooter>
+            <div className="pt-2">
               <Button
                 type="submit"
                 disabled={resetSubmitting}
@@ -295,7 +293,7 @@ export default function Auth() {
                 {resetSubmitting && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
                 재설정 링크 보내기
               </Button>
-            </DialogFooter>
+            </div>
           </form>
         </DialogContent>
       </Dialog>
@@ -317,7 +315,7 @@ export default function Auth() {
               <li>대표 이메일 주소를 모두 시도하여 비밀번호 재설정 메일 수신 여부 확인</li>
             </ul>
           </div>
-          <DialogFooter>
+          <div className="pt-2">
             <Button
               variant="outline"
               className="w-full"
@@ -328,7 +326,7 @@ export default function Auth() {
             >
               비밀번호 재설정으로 이동
             </Button>
-          </DialogFooter>
+          </div>
         </DialogContent>
       </Dialog>
     </div>
