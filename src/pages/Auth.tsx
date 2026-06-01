@@ -247,14 +247,26 @@ export default function Auth() {
                   </div>
                   <div className="space-y-2">
                     <Label htmlFor="su-pwd">비밀번호</Label>
-                    <Input
-                      id="su-pwd"
-                      type="password"
-                      autoComplete="new-password"
-                      value={password}
-                      onChange={(e) => setPassword(e.target.value)}
-                      placeholder="최소 8자"
-                    />
+                    <div className="relative">
+                      <Input
+                        id="su-pwd"
+                        type={showSignUpPwd ? "text" : "password"}
+                        autoComplete="new-password"
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
+                        placeholder="최소 8자"
+                        className="pr-10"
+                      />
+                      <button
+                        type="button"
+                        onClick={() => setShowSignUpPwd((v) => !v)}
+                        className="absolute inset-y-0 right-0 flex items-center px-3 text-muted-foreground hover:text-foreground"
+                        aria-label={showSignUpPwd ? "비밀번호 숨기기" : "비밀번호 보기"}
+                        tabIndex={-1}
+                      >
+                        {showSignUpPwd ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
+                      </button>
+                    </div>
                     <p className="text-xs text-muted-foreground">
                       유출된 비밀번호는 사용할 수 없습니다 (HIBP 검사).
                     </p>
