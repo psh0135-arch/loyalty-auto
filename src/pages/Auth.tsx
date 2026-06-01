@@ -15,7 +15,7 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
-import { Sparkles, Loader2, KeyRound, Mail } from "lucide-react";
+import { Sparkles, Loader2, KeyRound, Mail, Eye, EyeOff } from "lucide-react";
 import { toast } from "sonner";
 import { Aurora } from "@/components/Aurora";
 
@@ -37,6 +37,8 @@ export default function Auth() {
   const [password, setPassword] = useState("");
   const [displayName, setDisplayName] = useState("");
   const [submitting, setSubmitting] = useState(false);
+  const [showSignInPwd, setShowSignInPwd] = useState(false);
+  const [showSignUpPwd, setShowSignUpPwd] = useState(false);
 
   const [resetOpen, setResetOpen] = useState(false);
   const [resetEmail, setResetEmail] = useState("");
@@ -171,13 +173,25 @@ export default function Auth() {
                   </div>
                   <div className="space-y-2">
                     <Label htmlFor="si-pwd">비밀번호</Label>
-                    <Input
-                      id="si-pwd"
-                      type="password"
-                      autoComplete="current-password"
-                      value={password}
-                      onChange={(e) => setPassword(e.target.value)}
-                    />
+                    <div className="relative">
+                      <Input
+                        id="si-pwd"
+                        type={showSignInPwd ? "text" : "password"}
+                        autoComplete="current-password"
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
+                        className="pr-10"
+                      />
+                      <button
+                        type="button"
+                        onClick={() => setShowSignInPwd((v) => !v)}
+                        className="absolute inset-y-0 right-0 flex items-center px-3 text-muted-foreground hover:text-foreground"
+                        aria-label={showSignInPwd ? "비밀번호 숨기기" : "비밀번호 보기"}
+                        tabIndex={-1}
+                      >
+                        {showSignInPwd ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
+                      </button>
+                    </div>
                   </div>
                   <Button
                     type="submit"
@@ -233,14 +247,26 @@ export default function Auth() {
                   </div>
                   <div className="space-y-2">
                     <Label htmlFor="su-pwd">비밀번호</Label>
-                    <Input
-                      id="su-pwd"
-                      type="password"
-                      autoComplete="new-password"
-                      value={password}
-                      onChange={(e) => setPassword(e.target.value)}
-                      placeholder="최소 8자"
-                    />
+                    <div className="relative">
+                      <Input
+                        id="su-pwd"
+                        type={showSignUpPwd ? "text" : "password"}
+                        autoComplete="new-password"
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
+                        placeholder="최소 8자"
+                        className="pr-10"
+                      />
+                      <button
+                        type="button"
+                        onClick={() => setShowSignUpPwd((v) => !v)}
+                        className="absolute inset-y-0 right-0 flex items-center px-3 text-muted-foreground hover:text-foreground"
+                        aria-label={showSignUpPwd ? "비밀번호 숨기기" : "비밀번호 보기"}
+                        tabIndex={-1}
+                      >
+                        {showSignUpPwd ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
+                      </button>
+                    </div>
                     <p className="text-xs text-muted-foreground">
                       유출된 비밀번호는 사용할 수 없습니다 (HIBP 검사).
                     </p>
