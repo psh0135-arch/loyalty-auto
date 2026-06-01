@@ -15,7 +15,7 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
-import { Sparkles, Loader2, KeyRound, Mail } from "lucide-react";
+import { Sparkles, Loader2, KeyRound, Mail, Eye, EyeOff } from "lucide-react";
 import { toast } from "sonner";
 import { Aurora } from "@/components/Aurora";
 
